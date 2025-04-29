@@ -1,54 +1,68 @@
-# React + TypeScript + Vite
+# 📖 SightSteps
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**Tiny Steps, Big Stories.**
 
-Currently, two official plugins are available:
+SightSteps is a storybook reading app designed for emerging young readers.  
+It features original short novels with highlighted sight words, clean design, and an engaging reading experience that's perfect for reading together with an adult or independently.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## Expanding the ESLint configuration
+## Features
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+-  **Original Children's Stories** — Fun, imaginative chapter books for young readers.
+-  **Sight Word Highlights** — Key sight words are softly highlighted to encourage practice and build confidence.
+-  **Click-to-Speak Words** — Students can tap sight words to hear correct pronunciation.
+-  **Kid-Friendly Visual Design** — Soft pastel backgrounds, clean layout, playful typography (Poppins font).
+-  **Mobile-First & Responsive** — Looks beautiful on phones, tablets, and desktops.
+-  **Modular Design** — Built to easily add more books, chapters, and content as the library grows.
+-  **"Congratulations" Page** — Reward screen after finishing a book to celebrate success.
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+---
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Built With
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+- **React** + **TypeScript** (Frontend Framework)
+- **Vite** (Blazing fast development tooling)
+- **TailwindCSS** (For modern, responsive UI styling)
+- **Framer Motion** (Smooth fade and slide animations)
+- **React Router** (Navigation between Library, Books, and Chapters)
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+---
+
+## UI Design Principles
+
+- **Soft, Stimulating Colors** — Light peach backgrounds, baby blue buttons, mint and pastel sight word highlights.
+- **Gentle Typography** — Poppins font for an approachable, kid-friendly look.
+- **Intuitive Navigation** — Large, friendly buttons for Next/Back navigation inside chapters.
+- **Calm, Focused Layout** — Maximum readability with a "storybook page" feeling.
+
+---
+
+## Roadmap
+
+- [x] MVP: 1 Book with 6 Chapters
+- [x] Highlight Sight Words
+- [x] Click-to-Speak Sight Words
+- [x] "Congratulations" Page at the End
+- [x] Fully Responsive Design
+- [ ] Add Additional Books and Chapters
+- [ ] Optional: Save Reading Progress for Each Reader
+- [ ] Add Profile Avatars for Kids
+- [ ] Unlock Achievements for Completed Books 
+
+---
+
+## Getting Started Locally
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/your-username/sightsteps.git
+   cd sightsteps
+
+2. Install Dependencies:
+   ```bash
+   npm install
+
+3. Run the app locally:
+   ```bash
+   npm run dev
