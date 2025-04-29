@@ -40,7 +40,7 @@ function ChapterPage() {
               <span
                 key={idx}
                 onClick={() => handleSpeak(cleanWord)}
-                className="bg-green-100 text-black px-3 py-1 rounded-xl font-semibold cursor-pointer mr-2 inline-block"
+                className="bg-[#A3D1C6] text-slate-700 px-3 py-1 rounded-xl font-semibold cursor-pointer mr-2 inline-block"
                 >
                 {word}{' '}
               </span>
@@ -66,7 +66,7 @@ function ChapterPage() {
   animate={{ opacity: 1, y: 0 }}
   transition={{ duration: 0.4, ease: 'easeOut' }}
 >
-        <h1 className="text-3xl font-bold text-emerald-800 mb-8 text-center">{chapter.title}</h1>
+        <h1 className="text-3xl font-bold text-[#3D8D7A] mb-8 text-center">{chapter.title}</h1>
 
         <div className="flex-1">
         {isLastPage ? (
