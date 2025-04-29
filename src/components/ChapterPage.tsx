@@ -1,6 +1,8 @@
 import { useParams, Link } from 'react-router-dom';
 import { useState } from 'react';
 import { books } from '../data/books';
+import { motion } from 'framer-motion';
+
 
 function ChapterPage() {
   const { bookId, chapterIndex } = useParams();
@@ -30,7 +32,7 @@ function ChapterPage() {
     const words = sentence.split(' ');
 
     return (
-      <p key={index} className="mb-4 text-lg leading-7">
+      <p key={index} className="mb-4 text-lg leading-7 text-slate-700">
         {words.map((word, idx) => {
           const cleanWord = word.replace(/[.,!?]/g, '').toLowerCase();
           if (chapter.sightWords.includes(cleanWord)) {
@@ -38,8 +40,8 @@ function ChapterPage() {
               <span
                 key={idx}
                 onClick={() => handleSpeak(cleanWord)}
-                className="bg-teal-200 text-black px-3 py-1 rounded-xl font-semibold cursor-pointer mr-2 inline-block"
-              >
+                className="bg-green-100 text-black px-3 py-1 rounded-xl font-semibold cursor-pointer mr-2 inline-block"
+                >
                 {word}{' '}
               </span>
             );
@@ -52,21 +54,37 @@ function ChapterPage() {
 
   const startIndex = currentPage * sentencesPerPage;
   const currentSentences = sentences.slice(startIndex, startIndex + sentencesPerPage);
+  const isLastPage = currentPage === totalPages - 1 && Number(chapterIndex) === book.chapters.length - 1;
+
 
   return (
-    <div className="min-h-screen bg-white flex flex-col">
-      <div className="max-w-3xl mx-auto p-8 flex flex-col flex-1">
-        <h1 className="text-3xl font-bold text-teal-600 mb-8 text-center">{chapter.title}</h1>
+<div className="min-h-screen bg-[#fff7f0] flex items-center justify-center p-4">
+<motion.div
+  className="max-w-3xl mx-auto p-8 flex flex-col flex-1 bg-white shadow-xl border border-gray-200 rounded-xl
+ rounded-xl"
+  initial={{ opacity: 0, y: 20 }}
+  animate={{ opacity: 1, y: 0 }}
+  transition={{ duration: 0.4, ease: 'easeOut' }}
+>
+        <h1 className="text-3xl font-bold text-emerald-800 mb-8 text-center">{chapter.title}</h1>
 
         <div className="flex-1">
-          {currentSentences.map((sentence, idx) => renderSentence(sentence, idx))}
+        {isLastPage ? (
+  <div className="text-center mt-12">
+    <h2 className="text-3xl font-bold text-green-700 mb-4">🎉 Congratulations! 🎉</h2>
+    <p className="text-lg text-gray-700">You finished the story. Great job reading!</p>
+    <p className="mt-4 text-sm text-gray-500">Feel free to read it again or explore other books in the library.</p>
+  </div>
+) : (
+  currentSentences.map((sentence, idx) => renderSentence(sentence, idx))
+)}
         </div>
 
         <div className="flex justify-between items-center mt-8">
           <button
             onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 0))}
             disabled={currentPage === 0}
-            className="bg-teal-400 hover:bg-teal-500 text-white text-lg font-semibold px-6 py-3 rounded-full disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300"
+            className="bg-emerald-800 hover:bg-teal-500 text-white text-lg font-semibold px-6 py-3 rounded-full disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300"
           >
             Back
           </button>
@@ -78,7 +96,7 @@ function ChapterPage() {
           <button
             onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages - 1))}
             disabled={currentPage === totalPages - 1}
-            className="bg-teal-400 hover:bg-teal-500 text-white text-lg font-semibold px-6 py-3 rounded-full disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300"
+            className="bg-emerald-800 hover:bg-teal-500 text-white text-lg font-semibold px-6 py-3 rounded-full disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300"
           >
             Next
           </button>
@@ -92,7 +110,8 @@ function ChapterPage() {
             ← Back to Library
           </Link>
         </div>
-      </div>
+        </motion.div>
+
     </div>
   );
 }
