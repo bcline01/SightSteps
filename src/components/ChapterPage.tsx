@@ -40,8 +40,9 @@ function ChapterPage() {
               <span
                 key={idx}
                 onClick={() => handleSpeak(cleanWord)}
-                className="bg-[#A3D1C6] text-slate-700 px-3 py-1 rounded-xl font-semibold cursor-pointer mr-2 inline-block"
-                >
+                style={{ backgroundColor: book.theme?.sightWordColor || "#A3D1C6" }}
+                className="text-slate-700 px-3 py-1 rounded-xl font-semibold cursor-pointer mr-2 inline-block"
+                                >
                 {word}{' '}
               </span>
             );
@@ -63,7 +64,10 @@ function ChapterPage() {
   }, [chapterIndex]);
 
   return (
-<div className="min-h-screen bg-[#fff7f0] flex items-center justify-center p-4">
+<div
+  className="min-h-screen flex items-center justify-center p-4"
+  style={{ backgroundColor: book.theme?.backgroundColor || "#fff7f0" }}
+>
 <motion.div
   className="max-w-3xl mx-auto p-8 flex flex-col flex-1 bg-white shadow-xl border border-gray-200 rounded-xl
  "
@@ -71,7 +75,12 @@ function ChapterPage() {
   animate={{ opacity: 1, y: 0 }}
   transition={{ duration: 0.4, ease: 'easeOut' }}
 >
-        <h1 className="text-3xl font-bold text-[#3D8D7A] mb-8 text-center">{chapter.title}</h1>
+<h1
+  className="text-3xl font-bold mb-8 text-center"
+  style={{ color: book.theme?.headerColor || "#3D8D7A" }}
+>
+  {chapter.title}
+</h1>
 
         <div className="flex-1">
         {isLastPage && isLastChapter ? (
@@ -87,7 +96,8 @@ function ChapterPage() {
       <div className="text-center mt-8">
         <Link
           to={`/book/${book.id}/chapter/${Number(chapterIndex) + 1}`}
-          className="inline-block bg-[#B3D8A8] hover:bg-[#B3D8A8]/75 text-slate-700 font-semibold py-2 px-6 rounded-full transition-all duration-300"
+          style={{ backgroundColor: book.theme?.buttonColor || "#B3D8A8" }}
+          className="inline-block text-slate-700 font-semibold py-2 px-6 rounded-full transition-all duration-300"
         >
           Next Chapter →
         </Link>
