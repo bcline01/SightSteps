@@ -1,5 +1,5 @@
 import { useParams, Link } from 'react-router-dom';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { books } from '../data/books';
 import { motion } from 'framer-motion';
 
@@ -54,14 +54,19 @@ function ChapterPage() {
 
   const startIndex = currentPage * sentencesPerPage;
   const currentSentences = sentences.slice(startIndex, startIndex + sentencesPerPage);
-  const isLastPage = currentPage === totalPages - 1 && Number(chapterIndex) === book.chapters.length - 1;
+  const isLastPage = currentPage === totalPages - 1;
+  const isLastChapter = Number(chapterIndex) === book.chapters.length - 1;
 
+  // Reset currentPage when chapter changes
+  useEffect(() => {
+    setCurrentPage(0);
+  }, [chapterIndex]);
 
   return (
 <div className="min-h-screen bg-[#fff7f0] flex items-center justify-center p-4">
 <motion.div
   className="max-w-3xl mx-auto p-8 flex flex-col flex-1 bg-white shadow-xl border border-gray-200 rounded-xl
- rounded-xl"
+ "
   initial={{ opacity: 0, y: 20 }}
   animate={{ opacity: 1, y: 0 }}
   transition={{ duration: 0.4, ease: 'easeOut' }}
@@ -69,15 +74,29 @@ function ChapterPage() {
         <h1 className="text-3xl font-bold text-[#3D8D7A] mb-8 text-center">{chapter.title}</h1>
 
         <div className="flex-1">
-        {isLastPage ? (
+        {isLastPage && isLastChapter ? (
   <div className="text-center mt-12">
     <h2 className="text-3xl font-bold text-green-700 mb-4">🎉 Congratulations! 🎉</h2>
     <p className="text-lg text-gray-700">You finished the story. Great job reading!</p>
-    <p className="mt-4 text-sm text-gray-500">Feel free to read it again or explore other books in the library.</p>
+    <p className="mt-4 text-sm text-gray-500 mb-6">Feel free to read it again or explore other books in the library.</p>
   </div>
 ) : (
-  currentSentences.map((sentence, idx) => renderSentence(sentence, idx))
+  <>
+    {currentSentences.map((sentence, idx) => renderSentence(sentence, idx))}
+    {isLastPage && !isLastChapter && (
+      <div className="text-center mt-8">
+        <Link
+          to={`/book/${book.id}/chapter/${Number(chapterIndex) + 1}`}
+          className="inline-block bg-[#B3D8A8] hover:bg-[#B3D8A8]/75 text-slate-700 font-semibold py-2 px-6 rounded-full transition-all duration-300"
+        >
+          Next Chapter →
+        </Link>
+      </div>
+    )}
+  </>
 )}
+
+
         </div>
 
         <div className="flex justify-between items-center mt-8">
